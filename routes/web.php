@@ -62,6 +62,15 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
     // ✅ ADD THIS (FIX)
     Route::post('/apply/{job}', [ApplicationController::class, 'store'])
         ->name('apply.job');
+
+    Route::get('/applications', [UserController::class, 'applications'])
+        ->name('user.applications');
+
+    Route::get('/profile', [UserController::class, 'profile'])
+    ->name('user.profile');
+
+    Route::post('/profile', [UserController::class, 'updateProfile'])
+        ->name('user.profile.update');
 });
 
 require __DIR__.'/auth.php';

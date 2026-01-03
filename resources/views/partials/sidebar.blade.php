@@ -32,6 +32,16 @@
                class="block px-4 py-2 rounded-lg hover:bg-slate-700 transition">
                 Available Jobs
             </a>
+
+            <a href="{{ route('user.applications') }}"
+            class="block px-4 py-2 rounded-lg hover:bg-slate-700 transition">
+                My Applications
+            </a>
+
+            <a href="{{ route('user.profile') }}"
+            class="block px-4 py-2 rounded-lg hover:bg-slate-700 transition">
+                Profile Settings
+            </a>
         @endif
     </nav>
 
