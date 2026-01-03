@@ -14,7 +14,11 @@
 <div class="flex min-h-screen">
 
     {{-- Sidebar --}}
-    @include('partials.sidebar')
+    @if(auth()->user()->role === 'admin')
+        @include('partials.sidebar-admin')
+    @else
+        @include('partials.sidebar-user')
+    @endif
 
     {{-- Main Content --}}
     <main class="flex-1 p-6">
