@@ -65,7 +65,7 @@
             <div class="flex items-center justify-between w-full">
                 <span>Applications</span>
 
-                @if($pendingApplicationsCount > 0)
+                @if(($pendingApplicationsCount ?? 0) > 0)
                     <span class="inline-flex items-center justify-center
                                     px-2 py-0.5 text-xs font-semibold
                                     bg-red-600 text-white rounded-full">

@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Application;
+use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,9 +22,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer('partials.sidebar-admin', function ($view) {
-            $pendingApplicationsCount = Application::where('status', 'Pending')->count();
-            $view->with('pendingApplicationsCount', $pendingApplicationsCount);
+            View::composer('partials.sidebar-admin', function ($view) {
+
+            if (Auth::check() && Auth::user()->role === 'admin') {
+
+                $pendingApplicationsCount = Application::where('status', 'Pending')->count();
+
+                $view->with('pendingApplicationsCount', $pendingApplicationsCount);
+            }
         });
     }
 }
