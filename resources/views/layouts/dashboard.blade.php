@@ -10,7 +10,28 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <script>
-document.getElementById('notifBtn')?.addEventListener('click', () => {document.getElementById('notifDropdown')?.classList.toggle('hidden');});
+document.addEventListener('DOMContentLoaded', function () {
+    const btn = document.getElementById('notifBtn');
+    const dropdown = document.getElementById('notifDropdown');
+
+    if (!btn || !dropdown) return;
+
+    // Toggle dropdown
+    btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('hidden');
+    });
+
+    // Prevent dropdown clicks from closing it
+    dropdown.addEventListener('click', function (e) {
+        e.stopPropagation();
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', function () {
+        dropdown.classList.add('hidden');
+    });
+});
 </script>
 <body class="bg-gray-100">
 
