@@ -14,6 +14,17 @@
         </div>
     </div>
 
+    @if(request('status'))
+        <div class="mb-4 text-sm text-gray-600">
+            Showing applications with status:
+            <span class="font-semibold">{{ request('status') }}</span>
+            <a href="{{ route('admin.applications') }}"
+            class="ml-2 text-indigo-600 underline">
+                Clear filter
+            </a>
+        </div>
+    @endif
+
     {{-- Table --}}
     <div class="overflow-x-auto">
         <table class="w-full border border-gray-200 rounded-lg overflow-hidden">

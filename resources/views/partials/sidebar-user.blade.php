@@ -1,11 +1,27 @@
-<aside class="w-64 bg-slate-900 text-gray-100 min-h-screen flex flex-col">
+<aside class="w-64 bg-gradient-to-b from-slate-800 to-slate-900 text-slate-100 min-h-screen flex flex-col">
 
-    {{-- Logo --}}
     <div class="flex items-center gap-3 px-6 py-5 border-b border-slate-700">
-        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-indigo-600 font-bold">
-            ER
+
+        {{-- Logo Icon --}}
+        <div class="flex items-center justify-center
+                    w-10 h-10 rounded-lg
+                    bg-indigo-600 text-white shadow">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M16 7V6a4 4 0 00-8 0v1M4 7h16M6 7v10a3 3 0 003 3h6a3 3 0 003-3V7"/>
+            </svg>
         </div>
-        <span class="text-lg font-semibold">e-Recruitment</span>
+
+        {{-- Brand Name --}}
+        <div class="leading-tight">
+            <span class="block text-lg font-semibold text-white">
+                e-Recruitment
+            </span>
+            <span class="block text-xs text-slate-300">
+                Job Portal System
+            </span>
+        </div>
     </div>
 
     {{-- Navigation --}}

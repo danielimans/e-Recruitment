@@ -1,11 +1,27 @@
-<aside class="w-64 bg-slate-900 text-gray-100 min-h-screen flex flex-col">
+<aside class="w-64 bg-gradient-to-b from-slate-800 to-slate-900 text-slate-100 min-h-screen flex flex-col">
 
-    {{-- Logo --}}
     <div class="flex items-center gap-3 px-6 py-5 border-b border-slate-700">
-        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-indigo-600 font-bold">
-            ER
+
+        {{-- Logo Icon --}}
+        <div class="flex items-center justify-center
+                    w-10 h-10 rounded-lg
+                    bg-indigo-600 text-white shadow">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M16 7V6a4 4 0 00-8 0v1M4 7h16M6 7v10a3 3 0 003 3h6a3 3 0 003-3V7"/>
+            </svg>
         </div>
-        <span class="text-lg font-semibold">Admin Panel</span>
+
+        {{-- Brand Name --}}
+        <div class="leading-tight">
+            <span class="block text-lg font-semibold text-white">
+                e-Recruitment
+            </span>
+            <span class="block text-xs text-slate-300">
+                Job Portal System
+            </span>
+        </div>
     </div>
 
     {{-- Navigation --}}
@@ -36,15 +52,28 @@
 
         {{-- Applications --}}
         <a href="{{ route('admin.applications') }}"
-           class="flex items-center gap-3 px-4 py-2 rounded-lg {{ request()->routeIs('admin.applications') ? 'bg-slate-700' : '' }}">
-            <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" stroke-width="1.5"
-                 viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M8 7h8M8 11h8M8 15h8M4 6h16v12H4z"/>
-            </svg>
-            Applications
-        </a>
+            class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-slate-700 transition">
 
+            {{-- Icon --}}
+            <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" stroke-width="1.5"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M8 7h8M8 11h8M8 15h8M4 6h16v12H4z"/>
+            </svg>
+
+            {{-- Label + Badge --}}
+            <div class="flex items-center justify-between w-full">
+                <span>Applications</span>
+
+                @if($pendingApplicationsCount > 0)
+                    <span class="inline-flex items-center justify-center
+                                    px-2 py-0.5 text-xs font-semibold
+                                    bg-red-600 text-white rounded-full">
+                        {{ $pendingApplicationsCount }}
+                    </span>
+                @endif
+            </div>
+        </a>
     </nav>
 
     {{-- Logout --}}

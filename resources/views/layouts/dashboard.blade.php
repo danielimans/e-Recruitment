@@ -20,20 +20,29 @@
         @include('partials.sidebar-user')
     @endif
 
-    {{-- Main Content --}}
-    <main class="flex-1 p-6">
-        <h1 class="text-2xl font-semibold mb-4">
-            @yield('title')
-        </h1>
+    {{-- Content Area --}}
+    <div class="flex-1 flex flex-col">
 
-        @if(session('success'))
-            <div class="mb-4 rounded-lg bg-green-100 px-4 py-3 text-green-800">
-                {{ session('success') }}
-            </div>
-        @endif
+        {{-- Header (NEW) --}}
+        <header class="bg-slate-900 border-b border-slate-700 px-6 py-4">
+            <h1 class="text-xl font-semibold text-white">
+                @yield('title')
+            </h1>
+        </header>
 
-        @yield('content')
-    </main>
+        {{-- Main Content --}}
+        <main class="flex-1 p-6 bg-gray-100">
+
+            @if(session('success'))
+                <div class="mb-4 rounded-lg bg-green-100 px-4 py-3 text-green-800">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @yield('content')
+        </main>
+
+    </div>
 
 </div>
 
