@@ -3,11 +3,11 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserJobController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,21 +15,20 @@ use App\Http\Controllers\HomeController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', function () {
+    // 1. If user is logged in, send them to their dashboard
     if (Auth::check()) {
         return Auth::user()->role === 'admin'
             ? redirect()->route('admin.dashboard')
             : redirect()->route('user.dashboard');
     }
-    return redirect()->route('login');
-});
 
-
-
-Route::get('/', [HomeController::class, 'index'])->name('home');
+    // 2. If NOT logged in, show the Landing Page (welcome.blade.php)
+    return view('welcome');
+})->name('home');
 
 /*
 |--------------------------------------------------------------------------
-| Dashboard Redirect (REQUIRED by Breeze)
+| Dashboard Redirect (Generic)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->get('/dashboard', function () {
@@ -47,8 +46,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::resource('/jobs', JobController::class);
     Route::get('/applications', [AdminController::class, 'applications'])->name('admin.applications');
-    Route::post('/applications/{application}/approve',[ApplicationController::class, 'approve'])->name('applications.approve');
-    Route::post('/applications/{application}/reject',[ApplicationController::class, 'reject'])->name('applications.reject');
+    Route::post('/applications/{application}/approve', [ApplicationController::class, 'approve'])->name('applications.approve');
+    Route::post('/applications/{application}/reject', [ApplicationController::class, 'reject'])->name('applications.reject');
 });
 
 /*
@@ -71,6 +70,16 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
     Route::post('/profile', [UserController::class, 'updateProfile'])->name('user.profile.update');
 
     Route::post('/change-password', [UserController::class, 'changePassword'])->name('user.change.password');
+
+    // Resume Builder Routes
+    Route::get('/resume-builder', [ResumeController::class, 'index'])->name('user.resume');
+    Route::post('/resume-builder/save', [ResumeController::class, 'store'])->name('user.resume.store');
+
 });
 
+/*
+|--------------------------------------------------------------------------
+| Authentication Routes
+|--------------------------------------------------------------------------
+*/
 require __DIR__.'/auth.php';
