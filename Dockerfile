@@ -34,5 +34,6 @@ RUN npm run build
 # 9. Set permissions (Critical for Laravel)
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# 10. Start the application (Removed migration for safety)
-CMD php artisan serve --host=0.0.0.0 --port=$PORT
+# 10. Start the application
+# We use ';' instead of '&&'. This means "Try to migrate, but start the server ANYWAY."
+CMD sh -c "php artisan migrate --force; php artisan serve --host=0.0.0.0 --port=$PORT"
