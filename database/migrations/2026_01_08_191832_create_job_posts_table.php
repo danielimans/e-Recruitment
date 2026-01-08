@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('job_posts', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->string('location');
-            $table->timestamps();
-        });
+        // FIX: Check if the table exists before creating it
+        if (! Schema::hasTable('job_posts')) {
+            Schema::create('job_posts', function (Blueprint $table) {
+                $table->id();
+                $table->string('title');
+                $table->text('description');
+                $table->string('location');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
