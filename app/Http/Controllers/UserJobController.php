@@ -11,13 +11,12 @@ class UserJobController extends Controller
 {
     public function index()
     {
-        $jobs = Job::latest()->get();
+    $jobs = Job::latest()->get();
 
-        // Get user's applications keyed by job_id
-        $applications = Application::where('user_id', Auth::id())
-            ->get()
-            ->keyBy('job_id');
+    $appliedJobIds = Application::where('user_id', Auth::id())
+        ->pluck('job_id')
+        ->toArray();
 
-        return view('user.jobs.index', compact('jobs', 'applications'));
-    }
+    return view('user.jobs.index', compact('jobs', 'appliedJobIds'));
+}
 }

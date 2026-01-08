@@ -7,16 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Job extends Model
 {
-    use HasFactory;
+    protected $table = 'job_posts';
 
     protected $fillable = [
         'title',
         'description',
-        'location'
+        'location',
     ];
-
-    public function applications()
-    {
-        return $this->hasMany(Application::class);
-    }
 }

@@ -59,7 +59,7 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
 
     Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
 
-    Route::get('/jobs', [UserJobController::class, 'index'])->name('user.jobs');
+    Route::get('/jobs', [UserJobController::class, 'index'])->name('user.jobs.index');
 
     Route::post('/apply/{job}', [ApplicationController::class, 'store'])->name('apply.job');
 
