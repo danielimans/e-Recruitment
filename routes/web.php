@@ -77,6 +77,15 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
 
 });
 
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/run-migration', function () {
+    // This runs the command programmatically
+    Artisan::call('migrate', ['--force' => true]);
+
+    return 'Migration run successfully! output: '.Artisan::output();
+});
+
 /*
 |--------------------------------------------------------------------------
 | Authentication Routes
