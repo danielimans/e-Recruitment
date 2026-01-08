@@ -26,7 +26,11 @@ class JobController extends Controller
             'location' => 'required'
         ]);
 
-        Job::create($request->all());
+        Job::create($request->only([
+            'title',
+            'description',
+            'location',
+        ]));
 
         return redirect()->route('jobs.index')
             ->with('success', 'Job created successfully');
@@ -40,21 +44,18 @@ class JobController extends Controller
     public function update(Request $request, Job $job)
     {
         $request->validate([
-            'title' => 'required|min:3',
-            'description' => 'required',
-            'location' => 'required'
-        ]);
+        'title' => 'required|min:3',
+        'description' => 'required',
+        'location' => 'required'
+    ]);
 
-        $job->update($request->all());
+    $job->update($request->only([
+        'title',
+        'description',
+        'location',
+    ]));
 
-        return redirect()->route('jobs.index')
-            ->with('success', 'Job updated successfully');
-    }
-
-    public function destroy(Job $job)
-    {
-        $job->delete();
-        return redirect()->route('jobs.index')
-            ->with('success', 'Job deleted successfully');
+    return redirect()->route('jobs.index')
+        ->with('success', 'Job updated successfully');
     }
 }
